@@ -99,7 +99,7 @@ def get_payoff_matrix(mutator, depth=2, forced_options=None, prune=None):
     :return: a dictionary representing the potential move combinations and their associated scores
     """
     if prune is None:
-        prune = config.decision_method == constants.PICK_SAFEST
+        prune = True
 
     winner = battle_is_over(mutator.state)
     if winner:
@@ -192,8 +192,5 @@ def find_best_move_safest(battles):
     return bot_choice
 
 def find_best_move(battle):
-    if config.decision_method == constants.PICK_SAFEST:
-        battles = battle.prepare_battles(join_moves_together=True)
-        return find_best_move_safest(battles)
-    else:
-        raise ValueError("Invalid decision method: {}".format(config.decision_method))
+    battles = battle.prepare_battles(join_moves_together=True)
+    return find_best_move_safest(battles)

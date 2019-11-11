@@ -15,7 +15,6 @@ user_to_challenge = None
 greeting_message = 'hf'
 battle_ending_message = 'gg'
 
-decision_method = constants.PICK_SAFEST
 use_relative_weights = False
 damage_calc_type = 'average'
 search_depth = 2

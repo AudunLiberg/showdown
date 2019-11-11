@@ -7,8 +7,6 @@ DEFAULT_MODE = "gen7randombattle"
 STANDARD_BATTLE = "standard_battle"
 RANDOM_BATTLE = "random_battle"
 
-PICK_SAFEST = "safest"
-
 SCORING_MULTIPLIER = "scoring_multiplier"
 
 START_STRING = "|start"
