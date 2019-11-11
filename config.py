@@ -8,7 +8,6 @@ websocket_uri = None
 username = None
 password = None
 bot_mode = None
-pokemon_mode = None
 run_count = None
 user_to_challenge = None
 greeting_message = 'hf'

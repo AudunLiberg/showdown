@@ -30,7 +30,7 @@ def parse_configs():
     config.username = env("PS_USERNAME")
     config.password = env("PS_PASSWORD", "")
     config.bot_mode = env("BOT_MODE")
-    config.pokemon_mode = env("POKEMON_MODE", constants.DEFAULT_MODE)
+    config.pokemon_mode = "gen7randombattle"
     config.run_count = int(env("RUN_COUNT", 1))
 
     if config.bot_mode == constants.CHALLENGE_USER:
