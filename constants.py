@@ -8,7 +8,6 @@ STANDARD_BATTLE = "standard_battle"
 RANDOM_BATTLE = "random_battle"
 
 PICK_SAFEST = "safest"
-PICK_NASH_EQUILIBRIUM = "nash"
 
 SCORING_MULTIPLIER = "scoring_multiplier"
 

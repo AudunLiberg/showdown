@@ -12,7 +12,6 @@ team_name = None
 pokemon_mode = None
 run_count = None
 user_to_challenge = None
-gambit_exe_path = ""
 greeting_message = 'hf'
 battle_ending_message = 'gg'
 

@@ -5,7 +5,6 @@ from config import logger
 
 from showdown.evaluate import evaluate
 from showdown.decide import pick_safest
-from showdown.decide import pick_move_in_equilibrium_from_multiple_score_lookups
 from showdown.helpers import battle_is_over
 
 from .objects import StateMutator
@@ -192,30 +191,9 @@ def find_best_move_safest(battles):
     logger.debug("Safest: {}, {}".format(bot_choice, payoff))
     return bot_choice
 
-
-def find_best_move_nash(battles):
-    list_of_payoffs = list()
-    for b in battles:
-        state = b.to_object()
-        mutator = StateMutator(state)
-        logger.debug("Attempting to find best move from: {}".format(mutator.state))
-        scores = get_payoff_matrix(mutator, depth=config.search_depth)
-        list_of_payoffs.append(scores)
-
-    return pick_move_in_equilibrium_from_multiple_score_lookups(list_of_payoffs)
-
-
 def find_best_move(battle):
     if config.decision_method == constants.PICK_SAFEST:
         battles = battle.prepare_battles(join_moves_together=True)
         return find_best_move_safest(battles)
-    elif config.decision_method == constants.PICK_NASH_EQUILIBRIUM:
-        battles = battle.prepare_battles()
-        if len(battles) > 7:
-            logger.debug("Not enough is known about the opponent's active pokemon - falling back to safest decision making")
-            battles = battle.prepare_battles(join_moves_together=True)
-            return find_best_move_safest(battles)
-        else:
-            return find_best_move_nash(battles)
     else:
         raise ValueError("Invalid decision method: {}".format(config.decision_method))
