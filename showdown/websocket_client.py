@@ -37,14 +37,14 @@ class PSWebsocketClient:
 
     async def receive_message(self):
         message = await self.websocket.recv()
-        logger.debug("Received from websocket: {}".format(message))
+        # logger.debug("Received from websocket: {}".format(message))
         return message
 
     async def send_message(self, room, message_list):
         message = room + "|" + "|".join(message_list)
         await self.websocket.send(message)
         self.last_message = message
-        logger.debug("Sent to websocket: {}".format(message))
+        # logger.debug("Sent to websocket: {}".format(message))
 
     async def get_id_and_challstr(self):
         while True:
