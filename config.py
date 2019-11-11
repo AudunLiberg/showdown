@@ -8,7 +8,6 @@ websocket_uri = None
 username = None
 password = None
 bot_mode = None
-team_name = None
 pokemon_mode = None
 run_count = None
 user_to_challenge = None

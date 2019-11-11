@@ -89,21 +89,15 @@ class PSWebsocketClient:
             logger.error("Could not log-in\nDetails:\n{}".format(response.content))
             raise LoginError("Could not log-in")
 
-    async def update_team(self, team):
-        message = ["/utm {}".format(team)]
-        await self.send_message('', message)
-
-    async def challenge_user(self, user_to_challenge, battle_format, team):
+    async def challenge_user(self, user_to_challenge, battle_format):
         if time.time() - self.last_challenge_time < 10:
             logger.info("Sleeping for 10 seconds because last challenge was less than 10 seconds ago")
             await asyncio.sleep(10)
-        await self.update_team(team)
         message = ["/challenge {},{}".format(user_to_challenge, battle_format)]
         await self.send_message('', message)
         self.last_challenge_time = time.time()
 
-    async def accept_challenge(self, battle_format, team):
-        await self.update_team(team)
+    async def accept_challenge(self, battle_format):
         username = None
         while username is None:
             msg = await self.receive_message()
@@ -123,8 +117,7 @@ class PSWebsocketClient:
         message = ["/accept " + username]
         await self.send_message('', message)
 
-    async def search_for_match(self, battle_format, team):
-        await self.update_team(team)
+    async def search_for_match(self, battle_format):
         message = ["/search {}".format(battle_format)]
         await self.send_message("", message)
 

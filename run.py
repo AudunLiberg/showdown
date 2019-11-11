@@ -8,7 +8,6 @@ import constants
 import config
 from config import logger
 
-from teams import load_team
 from showdown.run_battle import pokemon_battle
 from showdown.websocket_client import PSWebsocketClient
 
@@ -31,7 +30,6 @@ def parse_configs():
     config.username = env("PS_USERNAME")
     config.password = env("PS_PASSWORD", "")
     config.bot_mode = env("BOT_MODE")
-    config.team_name = env("TEAM_NAME", None)
     config.pokemon_mode = env("POKEMON_MODE", constants.DEFAULT_MODE)
     config.run_count = int(env("RUN_COUNT", 1))
 
@@ -72,18 +70,16 @@ async def showdown():
     ps_websocket_client = await PSWebsocketClient.create(config.username, config.password, config.websocket_uri)
     await ps_websocket_client.login()
 
-    team = load_team(config.team_name)
-
     battles_run = 0
     wins = 0
     losses = 0
     while True:
         if config.bot_mode == constants.CHALLENGE_USER:
-            await ps_websocket_client.challenge_user(config.user_to_challenge, config.pokemon_mode, team)
+            await ps_websocket_client.challenge_user(config.user_to_challenge, config.pokemon_mode)
         elif config.bot_mode == constants.ACCEPT_CHALLENGE:
-            await ps_websocket_client.accept_challenge(config.pokemon_mode, team)
+            await ps_websocket_client.accept_challenge(config.pokemon_mode)
         elif config.bot_mode == constants.SEARCH_LADDER:
-            await ps_websocket_client.search_for_match(config.pokemon_mode, team)
+            await ps_websocket_client.search_for_match(config.pokemon_mode)
         else:
             raise ValueError("Invalid Bot Mode")
 
