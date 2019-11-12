@@ -10,8 +10,8 @@ def switch_out_move_triggered(move, damage_amounts):
 
 
 def get_best_switch_pokemon(mutator, instructions, attacker, attacking_side, defending_move, first_move):
-    from .select_best_move import get_payoff_matrix
-    from .select_best_move import get_possible_switches
+    from .select_best_move_util import get_payoff_matrix
+    from .select_best_move_util import get_possible_switches
     switches = get_possible_switches(attacking_side)
     if not switches or instructions.frozen:
         return None
